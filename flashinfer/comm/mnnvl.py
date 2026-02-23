@@ -861,6 +861,7 @@ def is_mnnvl_fabric_supported(device_idx: int) -> bool:
         pynvml.nvmlDeviceGetGpuFabricInfoV(handle, ctypes.byref(fabric_info))
         if (
             fabric_info.state >= pynvml.NVML_GPU_FABRIC_STATE_COMPLETED
+            and len(fabric_info.clusterUuid) > 0
             and fabric_info.clusterUuid[0] != 0
         ):
             return True
